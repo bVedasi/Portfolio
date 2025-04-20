@@ -1,0 +1,81 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 70%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border selection:bg-white/10 selection:text-white;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  .skill-tag {
+    @apply px-4 py-1.5 bg-secondary rounded-full text-sm font-medium;
+  }
+  
+  .glass-button {
+    @apply px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all;
+  }
+  
+  .section-title {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold mb-8;
+  }
+  
+  .education-card {
+    @apply bg-card rounded-2xl p-8 mb-6;
+  }
+
+  .glass-morphism {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
+  }
+
+  .grayscale-image {
+    @apply grayscale transition-all duration-300;
+  }
+  
+  .grayscale-image:hover {
+    @apply grayscale-0;
+  }
+  
+  .project-card:hover .grayscale-image {
+    @apply animate-grayscale-to-color;
+  }
+}
+
+@layer utilities {
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+}
