@@ -17,10 +17,10 @@ const HeroSection = () => {
         <div className="text-center max-w-4xl mx-auto">
           {/* Wrap Hero Section content inside BlurReveal */}
           <BlurReveal>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
+            <h1 style={{ fontFamily: "'DM Serif Text', serif" }} className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
               Hi! I'm <span className="text-primary">Vedasi Balla</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-12">
+            <p style={{ fontFamily: "'DM Serif Text', serif" }} className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-12">
               Designing experiences that captivate and inspire.
             </p>
           </BlurReveal>
