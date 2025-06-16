@@ -95,7 +95,7 @@ const ContactSection = () => {
           bring something extraordinary to life!
         </motion.h2>
 
-        <div className="max-w-lg mx-auto relative z-10">
+        <div className="max-w-lg  mx-auto relative z-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name Input */}
             <motion.div
@@ -109,7 +109,7 @@ const ContactSection = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Your Name"
-                className="bg-secondary/50 border-white/10 text-white placeholder:text-white/40"
+                className="p-2 bg-secondary/50 border-white/10 text-white placeholder:text-white/40"
                 required
               />
             </motion.div>
@@ -127,7 +127,7 @@ const ContactSection = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Your Email"
-                className="bg-secondary/50 border-white/10 text-white placeholder:text-white/40"
+                className="p-2 bg-secondary/50 border-white/10 text-white placeholder:text-white/40"
                 required
               />
             </motion.div>
@@ -144,7 +144,7 @@ const ContactSection = () => {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Your Message"
-                className="bg-secondary/50 border-white/10 text-white placeholder:text-white/40 min-h-[150px]"
+                className="p-2 bg-secondary/50 border-white/10 text-white placeholder:text-white/40 min-h-[150px]"
                 required
               />
             </motion.div>

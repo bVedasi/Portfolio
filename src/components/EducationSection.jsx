@@ -4,9 +4,9 @@ import React from 'react';
 const EducationSection = () => {
   const education = [
     {
-      level: "High School",
-      institution: "Silver Oaks International School",
-      grade: "10th Grade - 9.6 CGPA"
+      level: "Graduation",
+      institution: "VNR VJIET",
+      grade: "9.56 CGPA"
     },
     {
       level: "Intermediate",
@@ -14,9 +14,9 @@ const EducationSection = () => {
       grade: "9.75 CGPA"
     },
     {
-      level: "Graduation",
-      institution: "VNR VJIET",
-      grade: "9.56 CGPA"
+      level: "High School",
+      institution: "Silver Oaks International School",
+      grade: "10th Grade - 9.6 CGPA"
     }
   ];
 
