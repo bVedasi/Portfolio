@@ -1,10 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import React from 'react';
 
 const ProjectsSection = () => {
   const [startIndex, setStartIndex] = useState(0);
+  const [projectsPerView, setProjectsPerView] = useState(4);
   const scrollRef = useRef(null);
 
   const projects = [
@@ -45,6 +46,22 @@ const ProjectsSection = () => {
     }
   ];
 
+  // Responsive: set projectsPerView based on screen width
+  useEffect(() => {
+    const updateProjectsPerView = () => {
+      if (window.innerWidth < 768) {
+        setProjectsPerView(1);
+      } else if (window.innerWidth < 1024) {
+        setProjectsPerView(2);
+      } else {
+        setProjectsPerView(4);
+      }
+    };
+    updateProjectsPerView();
+    window.addEventListener('resize', updateProjectsPerView);
+    return () => window.removeEventListener('resize', updateProjectsPerView);
+  }, []);
+
   const { ref: sectionRef, inView: sectionInView } = useInView({
     triggerOnce: false,
     threshold: 0.2,
@@ -55,83 +72,78 @@ const ProjectsSection = () => {
     visible: { filter: "blur(0)", opacity: 1 },
   };
 
-  const visibleProjects = projects.slice(startIndex, startIndex + 4);
+  const visibleProjects = projects.slice(startIndex, startIndex + projectsPerView);
 
   const canScrollLeft = startIndex > 0;
-  const canScrollRight = startIndex + 4 < projects.length;
-
-  // Smooth scroll logic
-  const scrollToProject = (newIndex) => {
-    setStartIndex(newIndex);
-    if (scrollRef.current) {
-      const card = scrollRef.current.querySelector(`[data-project-idx="0"]`);
-      if (card) {
-        card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-      }
-    }
-  };
+  const canScrollRight = startIndex + projectsPerView < projects.length;
 
   const handleScrollLeft = () => {
-    if (canScrollLeft) scrollToProject(startIndex - 1);
+    if (canScrollLeft) setStartIndex(startIndex - 1);
   };
 
   const handleScrollRight = () => {
-    if (canScrollRight) scrollToProject(startIndex + 1);
+    if (canScrollRight) setStartIndex(startIndex + 1);
   };
 
   return (
     <section
       id="projects"
       ref={sectionRef}
-      className="py-24 px-6 md:px-12 bg-black border-t border-white/10"
+      className="py-24 px-2 md:px-12 bg-black border-t border-white/10"
     >
       <div className="container mx-auto">
         <div className="flex items-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold">Recent Works</h2>
         </div>
 
-        <div className="flex items-center justify-center mb-6">
+        <div className="flex items-center justify-center mb-6 w-full">
           {/* Left Arrow */}
           {canScrollLeft ? (
             <button
               onClick={handleScrollLeft}
-              className="text-white text-3xl px-3 py-1 rounded select-none"
+              className="text-white text-3xl px-1 py-1 rounded select-none w-8 flex-shrink-0"
               aria-label="Scroll Left"
               style={{ transition: 'background 0.2s' }}
             >
               &lt;
             </button>
           ) : (
-            <div className="w-10" />
+            <div className="w-8" />
           )}
 
-          {/* Projects Grid with smooth scroll */}
+          {/* Projects Grid */}
           <div
             ref={scrollRef}
-            className="flex-1 flex justify-center overflow-x-auto scroll-smooth"
-            style={{ scrollBehavior: 'smooth' }}
+            className="flex justify-center w-full"
           >
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+              className={`grid gap-6 w-full ${
+                projectsPerView === 1
+                  ? 'grid-cols-1'
+                  : projectsPerView === 2
+                  ? 'grid-cols-2'
+                  : 'grid-cols-4'
+              }`}
               initial="hidden"
               animate={sectionInView ? "visible" : "hidden"}
               variants={blurVariants}
               transition={{ duration: 1, ease: "easeOut" }}
-              style={{ width: '100%' }}
             >
               {visibleProjects.map((project, index) => (
                 <motion.div
-                  key={project.id}
-                  data-project-idx={index}
-                  className="project-card group relative rounded-lg overflow-hidden"
-                  initial="hidden"
-                  animate={sectionInView ? "visible" : "hidden"}
-                  variants={blurVariants}
-                  transition={{
-                    duration: 1,
-                    delay: index * 0.2,
-                    ease: "easeOut",
-                  }}
+                    key={project.id}
+                    data-project-idx={index}
+                    className={`project-card group rounded-2xl overflow-hidden w-full max-w-md
+                      ${projectsPerView === 1 ? "max-w-full" : ""}
+                      md:max-w-none`}
+                    initial="hidden"
+                    animate={sectionInView ? "visible" : "hidden"}
+                    variants={blurVariants}
+                    transition={{
+                      duration: 1,
+                      delay: index * 0.2,
+                      ease: "easeOut",
+                    }}
                 >
                   <div className="aspect-square overflow-hidden">
                     <img
@@ -140,7 +152,6 @@ const ProjectsSection = () => {
                       className="grayscale-image w-full h-full object-cover"
                     />
                   </div>
-
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <a
                       href={project.url}
@@ -160,14 +171,14 @@ const ProjectsSection = () => {
           {canScrollRight ? (
             <button
               onClick={handleScrollRight}
-              className="text-white text-3xl px-3 py-1 rounded select-none"
+              className="text-white text-3xl px-1 py-1 rounded select-none w-8 flex-shrink-0"
               aria-label="Scroll Right"
               style={{ transition: 'background 0.2s' }}
             >
               &gt;
             </button>
           ) : (
-            <div className="w-10" />
+            <div className="w-8" />
           )}
         </div>
       </div>
