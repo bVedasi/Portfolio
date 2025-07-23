@@ -25,6 +25,12 @@
     --input: 0 0% 15%;
     --ring: 0 0% 70%;
     --radius: 0.75rem;
+    /* Nothing-specific design tokens */
+    --nothing-glow: 45 100% 70%;
+    --nothing-glow-soft: 45 100% 50%;
+    --nothing-surface-1: 0 0% 10%;
+    --nothing-surface-2: 0 0% 15%;
+    --nothing-surface-3: 0 0% 20%;
   }
 
   * {
