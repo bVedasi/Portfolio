@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import emailjs from 'emailjs-com';
 import React from 'react';
+
 const ContactSection = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ const ContactSection = () => {
     email: "",
     message: ""
   });
+  const [submitStatus, setSubmitStatus] = useState(null); // null, 'sending', 'success', 'error'
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +25,9 @@ const ContactSection = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   
+    // Show loading state
+    setSubmitStatus('sending');
+  
     emailjs.send(
       'portfolio-vedasi',      
       'template_nn977ij',      
@@ -31,24 +36,41 @@ const ContactSection = () => {
     )
     .then((result) => {
       console.log("Email successfully sent:", result.text);
-      toast({
-        title: "Message sent!",
-        description: "Thanks for reaching out. I'll get back to you soon.",
-      });
+      setSubmitStatus('success');
   
-      // Reset form
-      setFormData({ name: "", email: "", message: "" });
+      // Reset form after a delay
+      setTimeout(() => {
+        setFormData({ name: "", email: "", message: "" });
+        setSubmitStatus(null);
+      }, 3000);
     })
     .catch((error) => {
       console.error("Email sending error:", error);
+      setSubmitStatus('error');
+      
+      // Provide specific error messages based on error type
+      let errorMessage = "Something went wrong while sending your message. Please try again later.";
+      
+      if (error.status === 412) {
+        errorMessage = "Email service configuration issue. Please contact the site administrator.";
+      } else if (error.status === 400) {
+        errorMessage = "Invalid email format. Please check your details and try again.";
+      } else if (error.status === 401) {
+        errorMessage = "Email service authentication failed. Please try again later.";
+      }
+      
       toast({
         title: "Error",
-        description: "Something went wrong while sending your message. Please try again later.",
+        description: errorMessage,
         variant: "destructive"
       });
+      
+      // Reset error status after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus(null);
+      }, 5000);
     });
   };
-  
 
   const fadeInVariants = {
     hidden: { opacity: 0, filter: 'blur(20px)' },
@@ -61,7 +83,7 @@ const ContactSection = () => {
     threshold: 0.1, // Trigger when 10% of the section is visible
   });
 
-  return (
+return (
     <section
       ref={sectionRef}
       id="contact"
@@ -86,7 +108,7 @@ const ContactSection = () => {
 
         {/* Section Title */}
         <motion.h2
-          className="text-4xl md:text-4xl lg:text-5xl font-bold text-center mb-24"
+          className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-24"
           initial="hidden"
           animate={sectionInView ? "visible" : "hidden"}
           variants={fadeInVariants}
@@ -95,7 +117,7 @@ const ContactSection = () => {
           bring something extraordinary to life!
         </motion.h2>
 
-        <div className="max-w-lg  mx-auto relative z-10">
+        <div className="max-w-lg mx-auto relative z-10">
           <form onSubmit={handleSubmit} className="space-y-6">
         {/* Name Input */}
         <motion.div
@@ -109,7 +131,7 @@ const ContactSection = () => {
             value={formData.name}
             onChange={handleChange}
             placeholder="Your Name"
-            className="w-full p-3 h-14 rounded-lg bg-input text-black placeholder:text-gray-500 font-mono text-lg border-none"
+            className="w-full p-3 h-14 rounded-lg bg-input text-white placeholder:text-gray-400 font-mono text-lg border-none"
             required
           />
         </motion.div>
@@ -127,7 +149,7 @@ const ContactSection = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="Your Email"
-            className="w-full p-3 h-14 rounded-lg bg-input text-black placeholder:text-gray-500 font-mono text-lg border-none"
+            className="w-full p-3 h-14 rounded-lg bg-input text-white placeholder:text-gray-400 font-mono text-lg border-none"
             required
           />
         </motion.div>
@@ -145,7 +167,7 @@ const ContactSection = () => {
             onChange={handleChange}
             placeholder="Your Message"
             rows={6}
-            className="w-full p-3 rounded-lg bg-input text-black placeholder:text-gray-500 font-mono text-lg resize-none border-none"
+            className="w-full p-3 rounded-lg bg-input text-white placeholder:text-gray-400 font-mono text-lg resize-none border-none"
             required
           />
         </motion.div>
@@ -159,11 +181,34 @@ const ContactSection = () => {
         >
           <Button 
             type="submit" 
-            className="w-full h-14 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-lg font-mono rounded-lg"
+            disabled={submitStatus === 'sending'}
+            className="w-full h-14 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-lg font-mono rounded-lg disabled:opacity-50"
           >
-            Send Message
+            {submitStatus === 'sending' ? 'Sending...' : 'Send Message'}
           </Button>
         </motion.div>
+
+        {/* Status Messages */}
+        {submitStatus && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mt-4"
+          >
+            {submitStatus === 'success' && (
+              <div className="text-green-400 font-mono text-lg flex items-center justify-center space-x-2">
+                <span className="h-2 w-2 bg-green-400 rounded-full"></span>
+                <span>Message sent successfully!</span>
+              </div>
+            )}
+            {submitStatus === 'sending' && (
+              <div className="text-blue-400 font-mono text-lg flex items-center justify-center space-x-2">
+                <div className="h-2 w-2 bg-blue-400 rounded-full animate-pulse"></div>
+                <span>Sending your message...</span>
+              </div>
+            )}
+          </motion.div>
+        )}
         </form>
         </div>
       </div>
