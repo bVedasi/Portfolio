@@ -11,11 +11,12 @@ const ProjectsSection = () => {
   const projects = [
     {
       id: 1,
-      title: "Safe Voice",
-      image: "/SafeVoice.png",
-      category: "Front End Development",
-      url: "https://safevoice.netlify.app/"
+      title: "TODO App",
+      image: "/todo.png",
+      category: "Web Development with AI Integration",
+      url: "https://github.com/bVedasi/ToDoApp"
     },
+    
     {
       id: 2,
       title: "AI Recipe Generator",
@@ -25,20 +26,27 @@ const ProjectsSection = () => {
     },
     {
       id: 3,
-      title: "AgroTech",
-      image: "/AgroTech.png",
-      category: "Hackathon",
-      url: "https://github.com/bVedasi/Agrotech.github.io"
+      title: "Rental",
+      image: "/rental.png",
+      category: "Design Thinking",
+      url: "https://github.com/bVedasi/Rental"
     },
     {
       id: 4,
+      title: "Safe Voice",
+      image: "/SafeVoice.png",
+      category: "Front End Development",
+      url: "https://safevoice.netlify.app/"
+    },
+    {
+      id: 5,
       title: "Figma",
       image: "/Figma.png",
       category: "Figma Design",
       url: "https://www.figma.com/proto/2EMDkgQWnTfYNaCEYStv2d/MapAnApp?node-id=1-5979&t=J9RnxP54dmv28Uis-1"
     },
     {
-      id: 5,
+      id: 6,
       title: "Games Arcade",
       image: "/Games.png",
       category: "Python Programming",
