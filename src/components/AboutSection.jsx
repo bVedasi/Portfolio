@@ -89,7 +89,7 @@ const AboutSection = () => {
           >
             <div className="rounded-2xl overflow-hidden w-full max-w-md">
               <img
-                src="/Vedasi.jpg"
+                src="/VedasiBalla.jpg"
                 alt="Vedasi profile"
                 style={{ filter: "grayscale(100%)" }}
                 className="w-full h-auto"
