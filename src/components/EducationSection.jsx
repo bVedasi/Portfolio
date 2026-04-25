@@ -6,7 +6,7 @@ const EducationSection = () => {
     {
       level: "Graduation",
       institution: "VNR VJIET",
-      grade: "9.55 CGPA"
+      grade: "9.64 CGPA"
     },
     {
       level: "Intermediate",
