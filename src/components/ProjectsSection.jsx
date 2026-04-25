@@ -18,9 +18,16 @@ const ProjectsSection = () => {
       url: "https://github.com/bVedasi/ToDoApp",
       description:"A Python-based to-do list application with an intelligent recommendation engine. Features database integration, task management capabilities, and automated suggestions to help users organize and prioritize their daily tasks."
     },
-    
     {
       id: 2,
+      title: "RAG Chatbot",
+      image: "/chatbot.png",
+      category: "RAG Based Cusotm Chatbot",
+      url: "https://create-custom-agent.vercel.app/p",
+      description:"Built a RAG chatbot system that ingests user-provided folders and text, converts them into a searchable knowledge base, and powers a custom conversational agent for retrieval-grounded question answering."
+    },
+    {
+      id: 3,
       title: "AI Recipe Generator",
       image: "/Recipe.png",
       category: "AI with python",
@@ -28,7 +35,7 @@ const ProjectsSection = () => {
       description:"A Streamlit-powered web application that generates personalized recipe recommendations using the Spoonacular API. Users input available ingredients and meal preferences to discover matching recipes with detailed cooking instructions"
     },
     {
-      id: 3,
+      id: 4,
       title: "Rental",
       image: "/rental.png",
       category: "Design Thinking",
@@ -36,7 +43,7 @@ const ProjectsSection = () => {
       description:"A full-stack rental platform built with TypeScript, React, and Supabase demonstrating user-centric design thinking and modern web development. Features authentication, shopping cart functionality, product categorization, and responsive UI with Tailwind CSS."
     },
     {
-      id: 4,
+      id: 5,
       title: "Safe Voice",
       image: "/SafeVoice.png",
       category: "Front End Development",
@@ -44,7 +51,7 @@ const ProjectsSection = () => {
       description:"A React-based web application that promotes safe communication by analyzing text input for harmful content. Utilizes the Perspective API to provide real-time feedback on message safety, helping users craft respectful and non-offensive messages."
     },
     {
-      id: 5,
+      id: 6,
       title: "Figma",
       image: "/Figma.png",
       category: "Figma Design",
@@ -52,7 +59,7 @@ const ProjectsSection = () => {
       description:"A Figma prototype for 'MapAnApp', a mobile application designed to help users discover and explore local attractions. Features intuitive navigation, interactive maps, and user-friendly interfaces to enhance the travel experience."
     },
     {
-      id: 6,
+      id: 7,
       title: "Games Arcade",
       image: "/Games.png",
       category: "Python Programming",
