@@ -4,7 +4,7 @@ import React from "react";
 const AboutSection = () => {
   const skills = ["MERN", "UI/UX", "Programming", "Figma", "ML"];
   const experiences = [
-    { role: "Volunteer", organization: "ACM, VNR VJIET", year: "Currently" },
+    { role: "ChairPerson", organization: "ACM, VNR VJIET", year: "Currently" },
     { role: "Student Editor", organization: "Vignana Vartha", year: "Currently" },
     { role: "FrontEnd Developer", organization: "VJ Community", year: "2024" },
   ];
